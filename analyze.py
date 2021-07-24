@@ -16,6 +16,9 @@ def create_data_frame():
         lengths = []
         word_counts = []
 
+        words = []
+        word_names = []
+
         lines = f.readlines()
         full_text = ""
         for line in lines:
@@ -42,6 +45,8 @@ def create_data_frame():
             messages.append(message)
             if message is not None:
                 word_counts.append(len(message.split()))
+                words.extend(message.split())
+                word_names.extend([name_split[1]]*len(message.split()))
                 lengths.append(len(message))
             else:
                 word_counts.append(None)
@@ -50,11 +55,14 @@ def create_data_frame():
         df = pandas.DataFrame({"Year": years, "Month": months, "Day": days, "Hour": hours, "Minute": minutes,
                                "Names": names, "Messages": messages, "Media": media, "Word Count": word_counts,
                                "Length": lengths})
-        return df
+
+        df_words = pandas.DataFrame({"Names": word_names, "Words": words})
+
+        return df, df_words
 
 
-def out_put_analysis(df):
-    with open('analysis.txt', 'w') as f:
+def out_put_analysis(df, df_words):
+    with codecs.open("analysis.txt", "w", encoding="utf-8") as f:
         f.write("---MESSAGES---\n")
         f.write(f"Message Count: {df['Messages'].size}\n")
         f.write(f"Lukas Message Count: {df[df['Names'] == 'Lukas']['Messages'].size}\n")
@@ -91,8 +99,15 @@ def out_put_analysis(df):
         f.write(f"Media Messages: {df['Messages'].size - df['Messages'].count()}\n")
         f.write(f"Media Messages: {(df['Messages'].size - df['Messages'].count())/df['Messages'].size*100}%\n")
         f.write(f"Is Media Tobi: {df[(df['Media'] == True) & (df['Names'] == 'Tobias Jungbluth')]['Media'].count()}\n")
-        f.write(f"Is Media Tobi: {df[(df['Media'] == True) & (df['Names'] == 'Tobias Jungbluth')]['Media'].count()}\n")
+        f.write(f"Is Not Media Tobi: {df[(df['Media'] == False) & (df['Names'] == 'Tobias Jungbluth')]['Media'].count()}\n")
+
+        f.write("---WORDS---\n")
+        f.write(f"Number of unique words: {df_words['Words'].nunique()}\n")
+        f.write(f"Most Used words to 50: \n{df_words['Words'].value_counts()[:50]}\n")
+        f.write(f"Most Used words 50 to 100: \n{df_words['Words'].value_counts()[50:100]}\n")
+        f.write(f"Most Used words 100 to 150: \n{df_words['Words'].value_counts()[100:150]}\n")
+        f.write(f"Most Used words 150 to 200: \n{df_words['Words'].value_counts()[150:200]}\n")
 
 
 if __name__ == "__main__":
-    out_put_analysis(create_data_frame())
+    out_put_analysis(*create_data_frame())
