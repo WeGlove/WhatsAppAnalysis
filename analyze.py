@@ -27,9 +27,9 @@ def create_data_frame():
         for i in range(1, len(splits), 2):
             time = splits[i]
             time_splits = re.split("(\d\d)", time)
-            years.append(time_splits[1])
+            years.append(time_splits[5])
             months.append(time_splits[3])
-            days.append(time_splits[5])
+            days.append(time_splits[1])
 
             hours.append(time_splits[7])
             minutes.append(time_splits[9])
@@ -112,6 +112,16 @@ def out_put_analysis(df, df_words):
         f.write(f"Is Not Media Lukas: {df[(df['Media'] == False) & (df['Names'] == 'Lukas')]['Media'].count()}\n")
         f.write(f"Is Not Media Lukas: {df[(df['Media'] == False) & (df['Names'] == 'Lukas')]['Media'].count() / df[df['Names'] == 'Lukas']['Media'].count() *100}%\n")
 
+        f.write("---Time---\n")
+        f.write(f"Number of unique days:\n {df['Day'].value_counts()}\n")
+        f.write(f"Number of unique days of Lukas:\n {df[df['Names'] == 'Lukas']['Day'].value_counts()}\n")
+        f.write(f"Number of unique days of Lukas:\n {df[df['Names'] == 'Tobias Jungbluth']['Day'].value_counts()}\n")
+        f.write(f"Number of unique hours:\n {df['Hour'].value_counts()}\n")
+        f.write(f"Number of unique hours of Lukas:\n {df[df['Names'] == 'Lukas']['Hour'].value_counts()}\n")
+        f.write(f"Number of unique hours of Tobi:\n {df[df['Names'] == 'Tobias Jungbluth']['Hour'].value_counts()}\n")
+        f.write(f"Number of unique minutes:\n {df['Minute'].value_counts()}\n")
+        f.write(f"Number of unique minutes of Lukas:\n {df[df['Names'] == 'Lukas']['Minute'].value_counts()}\n")
+        f.write(f"Number of unique minutes of Tobi:\n {df[df['Names'] == 'Tobias Jungbluth']['Minute'].value_counts()}\n")
 
         f.write("---WORDS---\n")
         f.write(f"Number of unique words: {df_words['Words'].nunique()}\n")
@@ -129,6 +139,7 @@ def out_put_analysis(df, df_words):
         f.write(f"Most Used words of Tobias 50 to 100:  \n{df_words[df_words['Names'] == 'Tobias Jungbluth']['Words'].value_counts()[50:100]}\n")
         f.write(f"Most Used words of Tobias 100 to 150: \n{df_words[df_words['Names'] == 'Tobias Jungbluth']['Words'].value_counts()[100:150]}\n")
         f.write(f"Most Used words of Tobias 150 to 200: \n{df_words[df_words['Names'] == 'Tobias Jungbluth']['Words'].value_counts()[150:200]}\n")
+
 
 
 if __name__ == "__main__":
