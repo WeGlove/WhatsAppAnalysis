@@ -1,0 +1,30 @@
+---MESSAGES---
+Message Count: 3079
+Lukas Message Count: 2198
+Lukas Message Count: 71.38681390061708%
+Tobias Message Count: 881
+Tobias Message Count: 28.613186099382915%
+---WORD COUNT---
+Word Count : 27092.0
+Word Count Tobi: 7659.0
+Word Count Tobi: 28.270338107190312%
+Word Count Lukas: 19433.0
+Word Count Lukas: 71.72966189280969%
+Word Count Mean: 9.284441398217957
+Word Count Tobi Mean: 8.916181606519208
+Word Count Lukas Mean: 9.438076736279747
+---WORD LENGTH---
+Word Length : 163666.0
+Word Length Tobi: 43803.0
+Word Length Tobi: 26.763652805103078%
+Word Length Lukas: 119863.0
+Word Length Lukas: 73.23634719489692%
+Word Length Mean: 56.08841672378341
+Word Length Tobi Mean: 50.993015133876604
+Word Length Lukas Mean: 58.21418164157358
+---MEDIA---
+Non Media Messages: 2918
+Non Media Messages: 94.77102955505035%
+Media Messages: 161
+Media Messages: 5.228970444949659%
+Word Length Tobi: 22
