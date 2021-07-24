@@ -269,7 +269,7 @@ Number of unique minutes:
 35    36
 32    34
 Name: Minute, dtype: int64
-Number of unique minutes:
+Correlation between minutes and ascending
  -0.22387210138876124
 Number of unique minutes of Lukas:
  20    50

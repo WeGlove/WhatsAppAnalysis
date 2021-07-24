@@ -1,7 +1,6 @@
 import codecs
 import re
 import pandas
-import numpy
 
 
 def create_data_frame():
@@ -127,7 +126,7 @@ def out_put_analysis(df, df_words):
         f.write(f"Number of unique minutes:\n {df['Minute'].value_counts()}\n")
         corr_stuff = pandas.Series(data=range(0, df['Minute'].value_counts().index.values.size),
                                    index=sorted(df['Minute'].value_counts().index.values))
-        f.write(f"Number of unique minutes:\n {df['Minute'].value_counts().corr(corr_stuff)}\n")
+        f.write(f"Correlation between minutes and ascending\n {df['Minute'].value_counts().corr(corr_stuff)}\n")
         f.write(f"Number of unique minutes of Lukas:\n {df[df['Names'] == 'Lukas']['Minute'].value_counts()}\n")
         f.write(f"Number of unique minutes of Tobi:\n {df[df['Names'] == 'Tobias Jungbluth']['Minute'].value_counts()}\n")
 
