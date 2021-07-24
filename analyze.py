@@ -45,7 +45,7 @@ def create_data_frame():
             messages.append(message)
             if message is not None:
                 word_counts.append(len(message.split()))
-                words.extend(message.split())
+                words.extend([word.lower() for word in message.split()])
                 word_names.extend([name_split[1]]*len(message.split()))
                 lengths.append(len(message))
             else:
@@ -73,6 +73,7 @@ def out_put_analysis(df, df_words):
 
         f.write("---WORD COUNT---\n")
         f.write(f"Word Count : {df['Word Count'].sum()}\n")
+        f.write(f"Word STD : {df['Word Count'].std()}\n")
         f.write(f"Word Count Tobi: {df[df['Names'] == 'Tobias Jungbluth']['Word Count'].sum()}\n")
         f.write(
             f"Word Count Tobi: {df[df['Names'] == 'Tobias Jungbluth']['Word Count'].sum()/df['Word Count'].sum() * 100}%\n")
@@ -80,7 +81,9 @@ def out_put_analysis(df, df_words):
         f.write(f"Word Count Lukas: {df[df['Names'] == 'Lukas']['Word Count'].sum()/df['Word Count'].sum() * 100}%\n")
         f.write(f"Word Count Mean: {df['Word Count'].mean()}\n")
         f.write(f"Word Count Tobi Mean: {df[df['Names'] == 'Tobias Jungbluth']['Word Count'].mean()}\n")
+        f.write(f"Word Tobi STD : {df[df['Names'] == 'Tobias Jungbluth']['Word Count'].std()}\n")
         f.write(f"Word Count Lukas Mean: {df[df['Names'] == 'Lukas']['Word Count'].mean()}\n")
+        f.write(f"Word Lukas STD : {df[df['Names'] == 'Lukas']['Word Count'].std()}\n")
 
         f.write("---WORD LENGTH---\n")
         f.write(f"Word Length : {df['Length'].sum()}\n")
@@ -91,7 +94,9 @@ def out_put_analysis(df, df_words):
         f.write(f"Word Length Lukas: {df[df['Names'] == 'Lukas']['Length'].sum()/df['Length'].sum() * 100}%\n")
         f.write(f"Word Length Mean: {df['Length'].mean()}\n")
         f.write(f"Word Length Tobi Mean: {df[df['Names'] == 'Tobias Jungbluth']['Length'].mean()}\n")
+        f.write(f"Word Length Tobi STD: {df[df['Names'] == 'Tobias Jungbluth']['Length'].std()}\n")
         f.write(f"Word Length Lukas Mean: {df[df['Names'] == 'Lukas']['Length'].mean()}\n")
+        f.write(f"Word Length Lukas STD: {df[df['Names'] == 'Lukas']['Length'].std()}\n")
 
         f.write("---MEDIA---\n")
         f.write(f"Non Media Messages: {df['Messages'].count()}\n")
@@ -99,7 +104,14 @@ def out_put_analysis(df, df_words):
         f.write(f"Media Messages: {df['Messages'].size - df['Messages'].count()}\n")
         f.write(f"Media Messages: {(df['Messages'].size - df['Messages'].count())/df['Messages'].size*100}%\n")
         f.write(f"Is Media Tobi: {df[(df['Media'] == True) & (df['Names'] == 'Tobias Jungbluth')]['Media'].count()}\n")
+        f.write(f"Is Media Tobi: {df[(df['Media'] == True) & (df['Names'] == 'Tobias Jungbluth')]['Media'].count()/df[(df['Names'] == 'Tobias Jungbluth')]['Media'].count() *100}%\n")
         f.write(f"Is Not Media Tobi: {df[(df['Media'] == False) & (df['Names'] == 'Tobias Jungbluth')]['Media'].count()}\n")
+        f.write(f"Is Not Media Tobi: {df[(df['Media'] == False) & (df['Names'] == 'Tobias Jungbluth')]['Media'].count() / df[df['Names'] == 'Tobias Jungbluth']['Media'].count() *100}%\n")
+        f.write(f"Is Media Lukas: {df[(df['Media'] == True) & (df['Names'] == 'Lukas')]['Media'].count()}\n")
+        f.write(f"Is Media Lukas: {df[(df['Media'] == True) & (df['Names'] == 'Lukas')]['Media'].count()/df[(df['Names'] == 'Lukas')]['Media'].count() *100}%\n")
+        f.write(f"Is Not Media Lukas: {df[(df['Media'] == False) & (df['Names'] == 'Lukas')]['Media'].count()}\n")
+        f.write(f"Is Not Media Lukas: {df[(df['Media'] == False) & (df['Names'] == 'Lukas')]['Media'].count() / df[df['Names'] == 'Lukas']['Media'].count() *100}%\n")
+
 
         f.write("---WORDS---\n")
         f.write(f"Number of unique words: {df_words['Words'].nunique()}\n")
@@ -107,6 +119,16 @@ def out_put_analysis(df, df_words):
         f.write(f"Most Used words 50 to 100: \n{df_words['Words'].value_counts()[50:100]}\n")
         f.write(f"Most Used words 100 to 150: \n{df_words['Words'].value_counts()[100:150]}\n")
         f.write(f"Most Used words 150 to 200: \n{df_words['Words'].value_counts()[150:200]}\n")
+
+        f.write(f"Most Used words of Lukas to 50:      \n{df_words[df_words['Names'] == 'Lukas']['Words'].value_counts()[:50]}\n")
+        f.write(f"Most Used words of Lukas 50 to 100:  \n{df_words[df_words['Names'] == 'Lukas']['Words'].value_counts()[50:100]}\n")
+        f.write(f"Most Used words of Lukas 100 to 150: \n{df_words[df_words['Names'] == 'Lukas']['Words'].value_counts()[100:150]}\n")
+        f.write(f"Most Used words of Lukas 150 to 200: \n{df_words[df_words['Names'] == 'Lukas']['Words'].value_counts()[150:200]}\n")
+
+        f.write(f"Most Used words of Tobias to 50:      \n{df_words[df_words['Names'] == 'Tobias Jungbluth']['Words'].value_counts()[:50]}\n")
+        f.write(f"Most Used words of Tobias 50 to 100:  \n{df_words[df_words['Names'] == 'Tobias Jungbluth']['Words'].value_counts()[50:100]}\n")
+        f.write(f"Most Used words of Tobias 100 to 150: \n{df_words[df_words['Names'] == 'Tobias Jungbluth']['Words'].value_counts()[100:150]}\n")
+        f.write(f"Most Used words of Tobias 150 to 200: \n{df_words[df_words['Names'] == 'Tobias Jungbluth']['Words'].value_counts()[150:200]}\n")
 
 
 if __name__ == "__main__":
