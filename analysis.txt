@@ -27,4 +27,5 @@ Non Media Messages: 2918
 Non Media Messages: 94.77102955505035%
 Media Messages: 161
 Media Messages: 5.228970444949659%
-Word Length Tobi: 22
+Is Media Tobi: 22
+Is Media Tobi: 22
