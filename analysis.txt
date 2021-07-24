@@ -74,6 +74,8 @@ Number of unique days:
 28     41
 06     31
 Name: Day, dtype: int64
+Correlation between day count and ascend:
+ 0.15222366043894098
 Number of unique days of Lukas:
  17    126
 11    118
@@ -107,7 +109,7 @@ Number of unique days of Lukas:
 28     32
 06     25
 Name: Day, dtype: int64
-Number of unique days of Lukas:
+Number of unique days of Tobi:
  17    62
 11    58
 25    52
@@ -162,6 +164,8 @@ Number of unique hours:
 07      3
 01      2
 Name: Hour, dtype: int64
+Correlation between hour count and ascend:
+ 0.43099444267580117
 Number of unique hours of Lukas:
  12    245
 13    225
